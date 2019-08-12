@@ -24,8 +24,10 @@ exports.authenticate = (req, res) => {
 };
 
 exports.logout = (req, res) => {
-  if( !req.isAuthenticated() )
+  if( !req.isAuthenticated() ){
     res.status(401).send({ error: 'Could not authenticate!' } );
+    return null;
+  }
 
   req.session.userId = null;
   res.clearCookie('token').status(200).send( { success: 'You are now logged out!' } );
