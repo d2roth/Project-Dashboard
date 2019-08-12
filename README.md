@@ -1,2 +1,2 @@
-# comp-2068
+# Project Dashboard
 A project reporting platform
