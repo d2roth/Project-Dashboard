@@ -77,9 +77,14 @@ const routes = require( './routes.js' );
 app.use( '/api', routes );
 
 // Handles any requests that don't match the ones above
-app.get('*', (req, res) => {
-  res.sendFile( path.join( __dirname + "/client/build/index.html" ) );
-})
+const root = path.join(__dirname, '/client/build');
+
+app.use(express.static(root));
+app.use((req, res, next) => {
+  if( req.method === 'GET' && req.accepts('html') && !req.is('json') && !req.path.includes('.') ){
+    res.sendFile('index.html', {root});
+  } else next();
+});
 
 const port = (process.env.PORT || 4000);
 app.listen( port, () => console.log( `Listening on ${port}`) );
