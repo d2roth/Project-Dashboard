@@ -1,2 +1,2 @@
 # comp-2068
-A blogging platform
+A project reporting platform
